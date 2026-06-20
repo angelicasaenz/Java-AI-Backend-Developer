@@ -79,9 +79,36 @@ public class App {
             System.out.println(arreglo[i]);
 }
 
+        // Mostrar en consola el promedio del arreglo.
 
-        
-        
-        
+        int promedio = 0;
+        int suma = 0;
+        for(int i = 0; i < arreglo.length; i++){
+            suma += arreglo[i];
+        }
+        promedio = suma / arreglo.length;
+        System.out.println("El promedio es: " + promedio);
+
+        // Mostrar en consola la suma del primer y último elemento del arreglo.
+        int primero = arreglo[0];
+        int ultimo = arreglo[arreglo.length -1];
+        int sumaPU = primero + ultimo;      
+        System.out.println("Primero: " + primero);
+        System.out.println("Último: " + ultimo);
+        System.out.println("La sumea del primero y el último es: " +sumaPU);
+    
+        // Mostrar en consola el mensaje "Existe cien" en dado caso el arreglo almacene por los menos un cien.
+        boolean existeCien = false;
+        for(int i = 0; i < arreglo.length; i++){
+            if (arreglo[i] == 100) {
+                existeCien = true;
+                break;
+        }
+        }
+        if (existeCien) {
+            System.out.println("Existe 100");
+        } else {
+            System.out.println("No existe 100");
+        }
     }
 }
