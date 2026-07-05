@@ -38,6 +38,10 @@ public class ValidadorRestaurante {
         System.out.println("Propina: " + propina);
         System.out.println("Total final: " + total);
         System.out.println("Cada persona paga: " + porPersona);
+        System.out.println("");
+        if (porPersona > 50000) {
+            System.out.println("!!Cuenta alta!!");
+        }
 
         sc.close();
 
