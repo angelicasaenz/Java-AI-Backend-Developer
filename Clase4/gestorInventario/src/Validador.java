@@ -40,4 +40,6 @@ public class Validador {
         return sc.nextLine();
     }
 
+
+
 }
