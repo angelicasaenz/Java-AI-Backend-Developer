@@ -1,9 +1,10 @@
 public class CuentaBancaria {
 
     // atributos
-    String titular;
-    String numeroCuenta;
-    double saldo;
+    private String titular;
+    private String numeroCuenta;
+    private double saldo;
+    private String tipoCuenta;
 
     // Constructores
 
@@ -12,9 +13,10 @@ public class CuentaBancaria {
         this.titular = "Sin asignar";
         this.numeroCuenta = "0000";
         this.saldo   = 0.0;
+        this.tipoCuenta = "Sin asignar";
     }
     // Constructor con parametros
-    public CuentaBancaria(String titular, String numeroCuenta, double saldo){
+    public CuentaBancaria(String titular, String numeroCuenta, double saldo, String tipoCuenta){
         this.titular = titular;
         this.numeroCuenta = numeroCuenta;
         if (saldo >= 0){
@@ -22,6 +24,7 @@ public class CuentaBancaria {
         } else {
             this.saldo = 0.0;
         }
+        this.tipoCuenta = tipoCuenta;
     }
 
     // No usar setter a lo loco pisando los valores porque si, sino crear reglas de negocio
@@ -48,22 +51,31 @@ public class CuentaBancaria {
     }
 
     // Retirar dinero
-    public void retirar(double monto){
+    public boolean retirar(double monto){
         if (monto <= 0){
             System.out.println("Error al retirar, el monto debe ser mayor a cero");
-            return;
-        }
-        if (monto > saldo){
+            return false;
+        } else if (monto > saldo){
             System.out.println("Error, saldo insuficiente. Saldo $" + saldo);
-            return;
+            return false;
+        } else {
+            saldo -= monto;
+            System.out.println("Retiro exitoso, nuevo saldo: $" + saldo);
+            return true;
         }
-        saldo -= monto;
-        System.out.println("Retiro exitoso, nuevo saldo: $" + saldo);
     }
 
     // toString() pra mostrar la informacion de la cuenta
 
     public String toString(){
-        return "Cuenta: " + numeroCuenta + " | Titular: " + titular + " | Saldo: $" + saldo;
+        return "Cuenta: " + numeroCuenta + " | Titular: " + titular + " | Saldo: $" + saldo + " | Tipo de cuenta: " + tipoCuenta;
+    }
+
+    // Transferir
+
+    public void transferir(CuentaBancaria destino, double monto){
+        if (retirar(monto)){
+            destino.depositar(monto);
+        }
     }
 }
