@@ -1,46 +1,87 @@
 package com.devsenior.gestor_productos.model;
 
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "productos")
+
 public class Producto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private int id;
     private String nombre;
+    private String descripcion;
     private double precio;
+    private int stock;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
+    @ManyToOne
+    @JoinColumn(name = "marca_id")
+    private Marca marca;
+
+    public Producto() {}
+
+    // getters y setters de todos los campos
 
 
-    // Siempre crear constructor vacio en SpringBoot
-
-    public Producto(){
-    }
-
-    public Producto(int id, String nombre, double precio){
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-    }
-
-    // Getters
-    public int getId(){
+    public Long getId() {
         return id;
     }
-    public String nombre (){
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
         return nombre;
     }
-    public double getPrecio(){
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public double getPrecio() {
         return precio;
     }
 
-    // Setters
-
-    public void setId(int id){
-        this.id = id;
-    }
-
-    public void setNombre(String nombre){
-        this.nombre = nombre;
-    }
-
-    public void setPrecio(double precio){
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca;
+    }
 }
